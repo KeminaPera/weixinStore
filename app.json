@@ -1,8 +1,10 @@
 {
   "pages":[
-    "pages/user/index",
+    "pages/my/index",
     "pages/cart/index",
-    "pages/orders/index",
+    "pages/coupon/index",
+    "pages/order/index",
+    "pages/order-detail/index",
     "pages/address-list/index",
     "pages/address-add/index",
     "pages/index/index",
@@ -37,7 +39,7 @@
       {
         "selectedIconPath": "images/my_y.png",
         "iconPath": "images/my_n.png",
-        "pagePath": "pages/user/index",
+        "pagePath": "pages/my/index",
         "text": "我的"
       }
     ]

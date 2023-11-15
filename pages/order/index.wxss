@@ -9,7 +9,7 @@
   line-height: 7vh;
 }
 
-.tab view{
+.tab text{
   flex: 1 0 auto;
   font-size: 14px;
   color: #333333;
@@ -85,4 +85,13 @@
   color: #999999;
   flex: 1 0 50%;
   text-align: right;
+}
+
+.empty {
+  font-size: 24rpx;
+  margin-top: 100rpx;
+  text-align: center;
+  color: #999;
+  height: 300rpx;
+  line-height: 300rpx;
 }

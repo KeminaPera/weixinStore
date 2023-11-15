@@ -1,18 +1,50 @@
 .list .item{
   display: flex;
-  margin: 0 18px;
+  flex-direction: column;
+  margin: 18px;
   border-bottom: 1px solid #dedede;
-  padding: 15px 0;
   align-items: center;
-  height: 98px;
+  border-radius: 20rpx;
+  padding: 20rpx;
+  background-color: #fff;
 }
-.item .left{
-  flex: 1 0 80%;
+.item .content{
   font-size: 14px;
+  width: 100%;
+  line-height: 60rpx;
+  border-bottom: 1px solid #aaa;
+  margin-bottom: 10rpx;
+}
+.footer{
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+.footer .left{
+  display: flex;
+  width: 100%;
+  font-size: 14px;
+  justify-content: flex-start;
+}
+.footer .right{
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+.footer .left radio{
+  size: 14px;
+}
+.addr{
+  font-size: 14px;
+  font-weight: 600;
+}
+.operator_txt{
+  font-size: 13px;
+  color: rgb(109, 107, 107);
 }
 .item .edit,.choice{
-  flex: 1 0 10%;
   text-align: center;
+  margin: 10rpx 20rpx;
 }
 .item .edit image{
   width: 20px;

@@ -1,4 +1,4 @@
-// pages/addressList/index.js
+// pages/orderDetails/index.js
 const app = getApp()
 Page({
 
@@ -6,37 +6,37 @@ Page({
    * 页面的初始数据
    */
   data: {
-    list:[],
-    id:'',
-    state:null,
+    list: [{ //商品列表
+      id: 2,
+      name: "榴恋草莓蛋糕-2磅188元/138元/4磅298元（深圳）",
+      spec: "2磅，+19.9元得水果（中盒）…",
+      price: 999.00,
+      num: 2,
+      select: false,
+    },
+    {
+      id: 3,
+      name: "榴恋草莓蛋糕-2磅188元/138元/4磅298元（深圳）",
+      spec: "2磅，+19.9元得水果（中盒）…",
+      price: 999.01,
+      num: 1,
+      select: false
+    }],
+    address:null,
+    data:null
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  defaultFun:function(data){
-    console.log("123456")
-    app.http('v1/user/addressList', {
-      id: data.currentTarget.dataset.item._id
-    }, 'POST')
-      .then(res => {
-        app.globalData.userInfo.address = res.data
-        this.setData({
-          id: res.data._id
-        })
-        if (this.data.state == 1){
-          wx.navigateBack({
-            delta: 1
-          })
-        }
-      })
-  },
   onLoad: function (options) {
-    this.setData({
-      //id: app.globalData.userInfo.address._id,
-      id: 123,
-      //state: options ? options.type:null
-      state:null
+    
+    console.log(options)
+    app.http('v1/order/get', { id: options.id},"POST").then(res=>{
+      console.log(res)
+      if(res.code == 200){
+        this.setData({data:res.data})
+      }
     })
   },
 
@@ -44,57 +44,50 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    app.http('v1/user/addressList', {
-      openid: app.globalData.openid
+    this.setData({
+      address: app.globalData.userInfo.address
     })
-      .then(res => {
-        console.log(res)
-        this.setData({
-          addressList: res.data
-        })
-      })
-       
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
+
   }
 })

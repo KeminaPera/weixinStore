@@ -1,4 +1,4 @@
-// pages/addressList/index.js
+// pages/coupon/index.js
 const app = getApp()
 Page({
 
@@ -6,37 +6,34 @@ Page({
    * 页面的初始数据
    */
   data: {
+    tabIndex:1,
     list:[],
-    id:'',
-    state:null,
   },
-
+  tabFun(e){
+    this.getList(e.currentTarget.dataset.index)
+    this.setData({
+      tabIndex: e.currentTarget.dataset.index
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
-  defaultFun:function(data){
-    console.log("123456")
-    app.http('v1/user/addressList', {
-      id: data.currentTarget.dataset.item._id
-    }, 'POST')
+  getList:function(id){
+    app.http('v1/user/couponList', {
+      state: id
+    }, "get")
       .then(res => {
-        app.globalData.userInfo.address = res.data
         this.setData({
-          id: res.data._id
+          list:res.data
         })
-        if (this.data.state == 1){
-          wx.navigateBack({
-            delta: 1
-          })
-        }
       })
   },
   onLoad: function (options) {
-    this.setData({
-      //id: app.globalData.userInfo.address._id,
-      id: 123,
-      //state: options ? options.type:null
-      state:null
+    this.getList(this.data.tabIndex)
+    app.http('/v1/user/getCoupon',{
+      id:"5b9b235f53b9af1484cbd54f"
+    },'POST').then(res=>{
+      
     })
   },
 
@@ -51,16 +48,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    app.http('v1/user/addressList', {
-      openid: app.globalData.openid
-    })
-      .then(res => {
-        console.log(res)
-        this.setData({
-          addressList: res.data
-        })
-      })
-       
+  
   },
 
   /**

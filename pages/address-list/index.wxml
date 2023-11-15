@@ -1,24 +1,37 @@
-<view style='height:100vh;'>
-<scroll-view scroll-y style='height:92vh;'>
-  <view class='list'>
-    <view class='item' wx:for="{{list}}" wx:key="name">
-      <view class='left'>
-        <view>{{item.mobile}} {{item.name}} 收</view>
-        <view>{{item.city[0]}} {{item.city[1]}} {{item.city[2]}} {{item.detailed}}</view>
-      </view>
-      <navigator  hover-class="none" url="/pages/addressAdd/index?city={{item.city[0]}},{{item.city[1]}},{{item.city[2]}}&mobile={{item.mobile}}&name={{item.name}}&detailed={{item.detailed}}&id={{item._id}}"  class='edit'>
-        <image src='/images/edit.png'></image>
-      </navigator>
-      <view class='choice' wx:if="{{item._id != id}}" bindtap='defaultFun' data-item="{{item}}">
-        <image src='/images/choice_n.png'></image>
-      </view>
-       <view class='choice' wx:else>
-        <image src='/images/choice_y.png'></image>
+<view style='height:100vh;background: rgba(220,220,220,.1)'>
+  <view class="empty" wx:if="{{addressList.length==0}}">
+    <view class="img">
+      <!-- <image src='http://jiales.gz-yami.com/addr.png'></image> -->
+    </view>
+    <view class='txt'>您还没有收货地址</view>
+  </view>
+
+  <scroll-view scroll-y style='height:calc(100vh - 8vh);'>
+    <view class='list'>
+      <view class='item' wx:for="{{addressList}}" wx:key="_id">
+        <view class='content'>
+          <view class='addr'>{{item.province}}{{item.city}}{{item.area}} {{item.addr}}</view>
+          <text>{{item.name}} {{item.mobile}}</text>
+        </view>
+        <view class="footer">
+          <view class="left">
+            <radio value="{{item.defaultAddr}}">默认地址</radio>
+          </view>
+          <view class="right">
+            <navigator hover-class="none" url="/pages/address-add/index?city={{item.province}},{{item.city}},{{item.area}}&mobile={{item.mobile}}&name={{item.name}}&addr={{item.addr}}&defaultAddr={{item.defaultAddr}}&id={{item._id}}" class='edit'>
+              <image src='/images/edit.png'></image>
+              <text class="operator_txt">编辑</text>
+            </navigator>
+            <view class='choice' wx:if="{{item._id != id}}" bindtap='defaultFun' data-item="{{item}}">
+              <image src='/images/delete.png'></image>
+              <text class="operator_txt">删除</text>
+            </view>
+          </view>
+        </view>
+
       </view>
     </view>
-  </view>
-</scroll-view>
-<navigator url="/pages/address-add/index" class='btn'>
- 新增收货地址
-</navigator>
+  </scroll-view>
+
+  <navigator url="/pages/address-add/index" class='btn active'>新增收货地址</navigator>
 </view>

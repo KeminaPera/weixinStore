@@ -9,7 +9,7 @@
     </view>
   </view>
 
-  <navigator url="/pages/order/index" class='item'>
+  <navigator url="/pages/order/index?type=0" class='item'>
     <view class='left'>我的订单</view>
     <view class='right'>
       <text>查看全部订单</text>
@@ -20,15 +20,15 @@
   <view class='icon'>
     <navigator url="/pages/order/index?type=1" hover-class="none" >
       <image src='/images/order_pending_payment.png' mode="aspectFit"></image>
-      <text>代付款</text>
+      <text>待付款</text>
     </navigator>
     <navigator url="/pages/order/index?type=2" hover-class="none" >
       <image src='/images/order_pending_delivery.png' mode="aspectFit"></image>
-      <text>代发货</text>
+      <text>待发货</text>
     </navigator>
     <navigator url="/pages/order/index?type=3" hover-class="none" >
       <image src='/images/order_already_shipped.png' mode="aspectFit"></image>
-      <text>已发货</text>
+      <text>待收货</text>
     </navigator>
     <navigator url="/pages/order/index?type=4" hover-class="none" >
       <image src='/images/order_completed.png' mode="aspectFit"></image>
