@@ -7,15 +7,14 @@
     duration="{{duration}}"
     circular="{{circular}}"
     >
-      <block wx:for="{{imgUrls}}">
+      <block wx:for="{{topImgUrls}}" wx:key="item">
         <swiper-item>
-          <!-- <image src='{{baseUrl+item.img_url}}' style='width:100%;height:220px;' /> -->
-          <image src='{{item}}' style='width:100%;height:220px;' />
+          <image src='{{item}}' style='width:100%;height:820px;' />
         </swiper-item>
       </block>
   </swiper>
   <view class='icon'>
-    <navigator hover-class="none" url="/pages/list/index?title=生日&id=5b8e37e34b640a63b33272dc">
+    <navigator hover-class="none" url="/pages/product/index?title=去选品&id=5b8e37e34b640a63b33272dc">
       <image src='/images/birthday.png' mode="aspectFit"></image>
       <text>生日</text>
     </navigator>
@@ -32,22 +31,13 @@
       <text>party</text>
     </navigator>
   </view>
-  <!-- <view class='title'>
-    <text class='cn'>主题</text>
-    <text class='en'>Theme</text>d5e7f5d5e7f5d5e7f5d5e7f5d5e7f5d5e7f5d5e7f5d5e7f5d5e7f5d5e7f5
-  </view> -->
-  <!-- <view class='img'>
-    <image src='/images/banner_2.png' mode="widthFix"></image>
-    <image src='/images/banner_3.png' mode="widthFix"></image>
-    <image src='/images/banner_4.png' mode="widthFix"></image>
-  </view> -->
   <view class='title'>
     <text class='cn'>猜你喜欢</text>
     <text class='en'>Lovely</text>
   </view>
   <view class='list'>
-    <view class='item' wx:for="{{list}}">
-      <navigator hover-class="none" url="/pages/details/index?id={{item._id}}">
+    <view class='item' wx:for="{{list}}" wx:key="id">
+      <navigator hover-class="none" url="/pages/details/index?id={{item.id}}">
         <image class='product' src='{{item.img}}'></image>
         <text class='text'>{{item.title}}.</text>
       </navigator>
@@ -59,5 +49,18 @@
       </view>
     </view>
   </view>
+  <swiper 
+    indicator-dots="{{indicatorDots}}"
+    autoplay="{{autoplay}}" 
+    interval="{{interval}}" 
+    duration="{{duration}}"
+    circular="{{circular}}"
+    >
+      <block wx:for="{{imgUrls}}" wx:key="item">
+        <swiper-item>
+          <image src='{{item}}' style='width:100%;height:220px;' />
+        </swiper-item>
+      </block>
+  </swiper>
   <!-- <button bindtap='imgsc'> 上传</button> -->
 </scroll-view>

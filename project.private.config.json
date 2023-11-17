@@ -10,6 +10,13 @@
       "list": [
         {
           "name": "",
+          "pathName": "pages/index/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
           "pathName": "pages/address-list/index",
           "query": "",
           "launchMode": "default",

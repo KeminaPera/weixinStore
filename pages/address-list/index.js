@@ -10,32 +10,56 @@ Page({
     id:'',
     state:null,
   },
-
   /**
-   * 生命周期函数--监听页面加载
+   * 删除地址提示窗口
    */
-  defaultFun:function(data){
-    console.log("123456")
-    app.http('v1/user/addressList', {
-      id: data.currentTarget.dataset.item._id
-    }, 'POST')
-      .then(res => {
-        app.globalData.userInfo.address = res.data
-        this.setData({
-          id: res.data._id
-        })
-        if (this.data.state == 1){
-          wx.navigateBack({
-            delta: 1
-          })
+  delAddressWindow: function(e) {
+    var id = e.currentTarget.dataset.id
+    var that = this;
+    wx.showModal({
+      title: '提示',
+      content: '您确定要删除该地址吗？',
+      complete: (res) => {
+        if (res.cancel) {
+          console.log("取消删除")
         }
-      })
+        if (res.confirm) {
+          that.doDeleteAddress(id)
+        }
+      }
+    })
   },
+  /**
+   * 删除地址
+   */
+  doDeleteAddress: function(addressId) {
+    console.log('id=',addressId)
+    app.http('v1/user/address/delete',{
+      id: addressId,
+    }, 'POST')
+    .then(res => {
+      if (res.code == 200) {
+        this.onShow()
+      }
+    })
+  },
+  defAddressChenge: function(e) {
+    var addressId=e.currentTarget.dataset.id;
+    app.http('v1/user/address/defAddressChanged',{
+      id:addressId
+    },'POST')
+    .then(
+      res => {
+        if (res.code == 200) {
+          this.onShow()
+        }
+      }
+    )
+  },
+
   onLoad: function (options) {
     this.setData({
-      //id: app.globalData.userInfo.address._id,
       id: 123,
-      //state: options ? options.type:null
       state:null
     })
   },
@@ -51,7 +75,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    app.http('v1/user/addressList', {
+    app.http('v1/user/address/list', {
       openid: app.globalData.openid
     })
       .then(res => {

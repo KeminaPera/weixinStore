@@ -9,6 +9,7 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     imgUrls: null,
+    topImgUrls: null,
     indicatorDots: true,
     autoplay: true,
     interval: 5000,
@@ -16,8 +17,6 @@ Page({
     circular: true,
     list:[],
     page:1,
-    // 假数据
-    imgUrls:['/images/1.jpg','/images/2.png','/images/3.png']
   },
   //事件处理函数
   bindViewTap: function() {
@@ -51,7 +50,7 @@ Page({
     this.getList()
   },
   getList: function(){
-    app.http('v1/home/getHotList', { page: this.data.page})
+    app.http('v1/product/list', { page: this.data.page}, 'POST')
       .then(res => {
         if (res.code == 200 && res.data.list.length > 0) {
           this.data.page++
@@ -68,10 +67,18 @@ Page({
       })
   },
   onLoad: function () {
+    console.log("触发加载事件")
     let app = getApp()
     this.getList()
 
-    app.http('v1/home/bannerList')
+    app.http('v1/img/top',{},'POST')
+    .then(res=>{
+      this.setData({
+        topImgUrls: res.data
+      })
+    })
+
+    app.http('v1/img/banner',{},'POST')
     .then(res=>{
       this.setData({
         imgUrls: res.data

@@ -8,21 +8,23 @@
 
   <scroll-view scroll-y style='height:calc(100vh - 8vh);'>
     <view class='list'>
-      <view class='item' wx:for="{{addressList}}" wx:key="_id">
+      <view class='item' wx:for="{{addressList}}" wx:key="id">
         <view class='content'>
           <view class='addr'>{{item.province}}{{item.city}}{{item.area}} {{item.addr}}</view>
           <text>{{item.name}} {{item.mobile}}</text>
         </view>
         <view class="footer">
           <view class="left">
-            <radio value="{{item.defaultAddr}}">默认地址</radio>
+            <radio-group bindchange="defAddressChenge" data-id="{{item.id}}">
+              <radio checked="{{item.defaultAddr}}" value="{{item.defaultAddr}}" color="#ff5f19">默认地址</radio>
+            </radio-group>
           </view>
           <view class="right">
-            <navigator hover-class="none" url="/pages/address-add/index?city={{item.province}},{{item.city}},{{item.area}}&mobile={{item.mobile}}&name={{item.name}}&addr={{item.addr}}&defaultAddr={{item.defaultAddr}}&id={{item._id}}" class='edit'>
+            <navigator hover-class="none" url="/pages/address-add/index?title='编辑地址'&city={{item.province}},{{item.city}},{{item.area}}&mobile={{item.mobile}}&name={{item.name}}&addr={{item.addr}}&defaultAddr={{item.defaultAddr}}&id={{item.id}}" class='edit'>
               <image src='/images/edit.png'></image>
               <text class="operator_txt">编辑</text>
             </navigator>
-            <view class='choice' wx:if="{{item._id != id}}" bindtap='defaultFun' data-item="{{item}}">
+            <view class='choice' wx:if="{{item.id != id}}" bindtap='delAddressWindow' data-id="{{item.id}}">
               <image src='/images/delete.png'></image>
               <text class="operator_txt">删除</text>
             </view>

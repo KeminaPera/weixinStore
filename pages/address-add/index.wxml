@@ -29,7 +29,7 @@
     </view>
     <view class='item'>
       <text>默认地址</text>
-      <switch bindchange="bindKeyDefaultAddr" value="{{defaultAddr}}"></switch>
+      <switch checked="{{defaultAddr}}" bindchange="bindKeyDefaultAddr" value="{{defaultAddr}}"></switch>
     </view>
   </view>
   <view class='btn active' bindtap='submitFun'>保存</view>

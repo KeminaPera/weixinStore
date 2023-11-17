@@ -9,9 +9,9 @@ Page({
     region: ['广东省', '广州市', '海珠区'],
     name:'',
     mobile:'',
-    province: '',
-    city: '',
-    area: '',
+    province: '广东省',
+    city: '广州市',
+    area: '海珠区',
     addr:'',
     defaultAddr: false,
     addressIs:true,
@@ -78,8 +78,9 @@ Page({
       return;
     }
     console.log('this.data.addressIs=', this.data.addressIs)
-    if (this.data.addressIs){ //添加
-      app.http('v1/user/addAddress', {
+    if (this.data._id == null){ //添加
+      console.log('新增操作！！！')
+      app.http('v1/user/address/add', {
         name: this.data.name,
         mobile: this.data.mobile,
         province: this.data.province,
@@ -96,7 +97,8 @@ Page({
           }
         })
     }else{
-      app.http('v1/user/editAddress', {
+      console.log('编辑操作！！！')
+      app.http('v1/user/address/edit', {
         id: this.data._id,
         name: this.data.name,
         mobile: this.data.mobile,
@@ -121,12 +123,17 @@ Page({
   onLoad: function (options) {
     if (options.id){
       this.setData({
-          region: options.city.split(','),
-          name: options.name,
-          mobile: options.mobile,
-          addr: options.addr,
-          _id: options.id,
-          addressIs:false
+        title: options.title,
+        region: options.city.split(','),
+        province: this.data.region[0],
+        city: this.data.region[1],
+        area: this.data.region[2],
+        name: options.name,
+        mobile: options.mobile,
+        addr: options.addr,
+        defaultAddr: options.defaultAddr == 'true',
+        _id: options.id,
+        addressIs:false
       })
     }
   },
